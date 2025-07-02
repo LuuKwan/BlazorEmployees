@@ -1,6 +1,6 @@
 ﻿@page "/employeesoverview"
-@attribute [StreamRendering(true)]
-
+@* @attribute [StreamRendering(true)] *@
+@rendermode InteractiveServer
 
 <h1>Employee Overview</h1>
 @if(Employees == null){
@@ -9,10 +9,12 @@
   </h1>
 } else {
   <div class="row">
+    <QuickViewPopup Employee="@_SelectedEmployeeForQuickView"></QuickViewPopup>
     @foreach(var employee in Employees)
     {
       <div class="col-6 col-lg-4 col-xl-3 col-xxl-3">
-        <EmployeeCard Employee= "@employee"></EmployeeCard>
+        <EmployeeCard Employee= "@employee"
+                      ShowQuickView="@SetEmployeeForQuickView"></EmployeeCard>
       </div>
     }
   </div>
